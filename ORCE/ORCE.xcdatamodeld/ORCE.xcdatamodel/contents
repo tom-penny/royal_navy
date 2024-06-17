@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G320" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Exercise" representedClassName="Exercise" syncable="YES" codeGenerationType="class">
+        <attribute name="course" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="grid" optional="YES" attributeType="String"/>
+        <attribute name="instructorID" optional="YES" attributeType="String"/>
+        <attribute name="studentID" optional="YES" attributeType="String"/>
+        <relationship name="phases" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Phase" inverseName="exercise" inverseEntity="Phase"/>
+    </entity>
+    <entity name="Observation" representedClassName="Observation" syncable="YES" codeGenerationType="class">
+        <attribute name="behaviour" optional="YES" attributeType="String"/>
+        <attribute name="isPositive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="String"/>
+        <relationship name="subsection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Subsection" inverseName="observations" inverseEntity="Subsection"/>
+    </entity>
+    <entity name="Phase" representedClassName="Phase" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="phases" inverseEntity="Exercise"/>
+        <relationship name="sections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Section" inverseName="phase" inverseEntity="Section"/>
+    </entity>
+    <entity name="Section" representedClassName="Section" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="phase" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Phase" inverseName="sections" inverseEntity="Phase"/>
+        <relationship name="subsections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subsection" inverseName="section" inverseEntity="Subsection"/>
+    </entity>
+    <entity name="Subsection" representedClassName="Subsection" syncable="YES" codeGenerationType="class">
+        <attribute name="result" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="observations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Observation" inverseName="subsection" inverseEntity="Observation"/>
+        <relationship name="section" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Section" inverseName="subsections" inverseEntity="Section"/>
+    </entity>
+</model>
